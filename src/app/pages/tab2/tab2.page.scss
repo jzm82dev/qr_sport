@@ -1,0 +1,59 @@
+.square {
+    width: 80%;
+    margin: 1%;
+}
+
+.wrapper {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-items: center;
+  }
+
+ strong {
+	font-size: 20px;
+	line-height: 26px;
+  color: #3880ff;
+  }
+
+.invalid{
+  color: red !important;
+  text-align: center !important;
+}  
+
+.center-button{
+  text-align: center;
+}
+
+div{
+  width: 100%;
+  height: 100%;
+}
+
+div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.button-scanner{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-height{
+  height: 10% !important;
+}
+
+.backgroud-green{
+	background-color: #2fdf75 !important;
+}
+
+.backgroud-red{
+	background-color: #ff4961;
+}

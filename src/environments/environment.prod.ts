@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  urlUser: 'https://fabrikapps.es/TENNIS_API/users.php',
+  urlShop: 'https://fabrikapps.es/TENNIS_API/shops.php',
 };

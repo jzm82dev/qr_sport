@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      LEER QR
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+      <div [ngClass]="{'no-height' : existsUser != 0}">
+        <ion-button class="button-scanner" fill="solid" size="medium" (click)="startScan()" color="warning">
+          {{textButton}}
+        </ion-button> 
+      </div>
+
+      <ion-card *ngIf="existsUser == 1" class="ion-text-center ion-no-border">
+        <ion-card-content>
+          <ion-img src="/assets/images/valid.png" ></ion-img>
+        </ion-card-content>
+      </ion-card>
+      
+      <ion-card *ngIf="existsUser == 1" class="backgroud-green">
+        <ion-card-header>
+          <ion-card-title>
+          </ion-card-title>
+          <ion-card-subtitle>
+            DATOS DEL CLIENTE
+          </ion-card-subtitle>
+          </ion-card-header>
+            <ion-card-content >
+              <ion-item >
+                Nombre {{ user.name }}
+              </ion-item>
+              <ion-item >
+                Apellido: {{ user.lastname_1 }}
+              </ion-item>
+              <ion-item >
+                Teléfono: {{ user.telefono }}
+              </ion-item>
+              <ion-item >
+                Email: {{ user.email }}
+              </ion-item>
+            </ion-card-content> 
+          </ion-card>
+       
+     
+          <ion-card *ngIf="existsUser == 2" class="ion-text-center ion-no-border" >
+            <ion-card-content>
+              <ion-img src="/assets/images/invalid.png" ></ion-img>
+             </ion-card-content>
+          </ion-card>
+          <strong *ngIf="existsUser == 2" class="invalid ion-text-center">Usuario no encontrado</strong>
+
+<!--
+ <div [ngClass]="{'no-height' : existsUser == 2}">
+  <ion-button class="button-scanner" fill="solid" size="medium" (click)="startScan()" color="warning">
+    {{textButton}}
+  </ion-button> 
+</div>
+-->
+
+
+</ion-content>

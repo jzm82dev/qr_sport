@@ -1,0 +1,48 @@
+<ion-header class="ion-no-border" translucent="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="Atrás" color="primary" mode="ios"></ion-back-button>
+    </ion-buttons>
+    <ion-title text-capitalize>Mi cuenta</ion-title>
+  </ion-toolbar>
+  </ion-header>
+
+<ion-content padding>
+  <ion-card *ngIf="userValid == 1">
+    <ion-card-header>
+      <ion-card-subtitle>
+          TUS DATOS 
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item >
+        Nombre: {{ user.name }}
+      </ion-item>
+      <ion-item >
+        Apellido: {{ user.lastname_1 }}
+      </ion-item>
+      <ion-item >
+        Teléfono: {{ user.telefono }}
+      </ion-item>
+      <ion-item >
+        Email: {{ user.email }}
+      </ion-item>
+    </ion-card-content> 
+  </ion-card>
+
+  <form #formulario="ngForm" (ngSubmit)="login(formulario)" *ngIf="userValid == 2">
+    <strong>Inicia Sesión</strong>
+    <ion-item>
+      <ion-input type="name" placeholder="Introduce tu DNI" required="true" name="dni"
+        pattern="^([0-9]+)([a-zA-Z]{1})$" [clearInput]="true"
+        [(ngModel)]="dni"
+      ></ion-input>
+    </ion-item>
+    
+    <ion-button type="submit" expand="block" [disabled]="formulario.invalid" color="success">
+      Login
+    </ion-button>
+
+    </form>
+
+  </ion-content>

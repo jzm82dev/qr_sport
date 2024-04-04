@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar color="warning" class="ion-text-center">
+    <ion-buttons slot="start">
+      <ion-button (click)="showMenu()">
+        <ion-icon slot="icon-only" name="menu-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      MOSTRAR QR
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+
+  <div id="container"> 
+    <form #formulario="ngForm" (ngSubmit)="createQR(formulario)" *ngIf="!qr_generated">
+      <strong>Genere su Código QR</strong>
+      <ion-item>
+        <ion-input type="name" placeholder="Introduce tu DNI" required="true" name="dni"
+          pattern="^([0-9]+)([a-zA-Z]{1})$" [clearInput]="true"
+          [(ngModel)]="dni"
+        ></ion-input>
+      </ion-item>
+      
+      <ion-button type="submit" expand="block" [disabled]="formulario.invalid" >
+        Crear QR
+      </ion-button>
+
+      </form>
+      <ion-card class="ion-text-center" *ngIf="qr_generated">
+        <ion-card-content>
+          <qrcode [qrdata]="qrString" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        </ion-card-content>
+       
+      </ion-card>
+      <strong *ngIf="qr_generated">{{user.name}} {{user.lastname_1}}</strong>
+  </div>
+  
+</ion-content>

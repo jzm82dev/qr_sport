@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="warning" class="ion-text-center">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      TUS TIENDAS
+    </ion-title>
+  </ion-toolbar>
+  <ion-searchbar *ngIf="userValid == 1" placeholder="Localidad" animated [debounce]="250"
+                 inputmode="text" (ionInput)="onSearchChange($event)">
+  </ion-searchbar>
+</ion-header>
+
+
+<ion-content *ngIf="userValid == 2" class="ion-padding">
+  <form #formulario="ngForm" (ngSubmit)="login(formulario)" >
+    <p class="ion-text-center">Inicia sesión para ver las tiendas con descuento.</p>
+    <ion-item>
+      <ion-input type="name" placeholder="Introduce tu DNI" required="true" name="dni"
+        pattern="^([0-9]+)([a-zA-Z]{1})$" [clearInput]="true"
+        [(ngModel)]="dni"
+      ></ion-input>
+    </ion-item>
+    
+    <ion-button type="submit" expand="block" [disabled]="formulario.invalid" color="success">
+      VER TIENDAS
+    </ion-button>
+
+    </form>
+</ion-content>
+
+<ion-content *ngIf="userValid == 1">
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content pullingText="Cargando" refreshingSpinner="bubbles"></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="!loaded">
+    <ion-item *ngFor="let heroe of [1,1,1,1,1,1,1,1]">
+      <ion-label>
+        <h1><ion-skeleton-text animated style="width: 30%;"></ion-skeleton-text></h1>
+        <h1><ion-skeleton-text animated style="width: 40%;"></ion-skeleton-text></h1>
+        <p>
+          <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+          <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-card *ngFor="let shop of shops | filter:searchText:'city'">
+    <ion-card-header>
+      <ion-card-title color="warning">{{ shop.name }}</ion-card-title> 
+      <ion-card-subtitle>{{ shop.direction }}, {{ shop.city }}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{ shop.info }}
+    </ion-card-content>
+  </ion-card>
+
+  <p *ngIf="shops.length == 0" class="ion-padding ion-text-center" >
+    <ion-text color="medium">
+      No hay tiendas con descuento actualmente
+    </ion-text>
+  </p>
+  <ion-infinite-scroll threshold="25%" position="bottom" (ionInfinite)="loadMoreData()">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
